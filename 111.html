@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>M's Blog</title>
+</head>
+<body style="background: black">
+<div class="autotype" id="autotype" style="color: white" align="center">
+    <p>到现在我还是没有放下</p>
+    <p>可能是我太懦弱，太软弱，想的太多</p>
+    今天是<span id="time"></span>
+    <p>这个网站会过期</p>
+    <p>有一天他会关闭</p>
+    <p>希望当他是404的时候</p>
+    <p>我能够重新站起来，开心的面对生活</p>
+    <p>可能你们都会说，大学嘛，无所谓，分了就是分了</p>
+    <p>说实话，我也明白，但是就是想起来就是心里难受</p>
+    <p>可能是我性格就是这么软弱的人吧</p>
+    <p>喂，你</p>
+    <p>真的会这辈子都不再有交集吗？</p>
+    <p>我们还会见面吗？</p>
+    <p>我们还可以一起去吃你最喜欢吃的火锅吗？</p>
+    <p>在哈尔滨是真的最后一次了吗？</p>
+    <p>......</p>
+    <p>我不像个男生，我容易眼眶泛红....</p>
+    <p>我希望</p>
+    <p>当这个网址真正的变成404的那一天，</p>
+    <p>我会坚强起来面对生活....</p>
+    <p>zzm  2020-09-09</p>
+    <p>......</p>
+</div>
+
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script>
+    $.fn.autotype = function() {
+        var myDate = new Date;
+        var year = myDate.getFullYear(); //获取当前年
+        var mon = myDate.getMonth() + 1; //获取当前月
+        var date = myDate.getDate(); //获取当前日
+        // var h = myDate.getHours();//获取当前小时数(0-23)
+        // var m = myDate.getMinutes();//获取当前分钟数(0-59)
+        // var s = myDate.getSeconds();//获取当前秒
+        var week = myDate.getDay();
+        var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        $("#time").html(year + "年" + mon + "月" + date + "日" + weeks[week]);
+        var $text = $(this);
+        console.log('this', this);
+        var str = $text.html(); //返回被选 元素的内容
+        var index = 0;
+        var x = $text.html('');
+        //$text.html()和$(this).html('')有区别
+        var timer = setInterval(function() {
+                //substr(index, 1) 方法在字符串中抽取从index下标开始的一个的字符
+                var current = str.substr(index, 1);
+                if (current == '<') {
+                    //indexOf() 方法返回">"在字符串中首次出现的位置。
+                    index = str.indexOf('>', index) + 1;
+                } else {
+                    index++;
+                }
+                //console.log(["0到index下标下的字符",str.substring(0, index)],["符号",index & 1 ? '_': '']);
+                //substring() 方法用于提取字符串中介于两个指定下标之间的字符
+                $text.html(str.substring(0, index) + (index & 1 ? '_': ''));
+                if (index >= str.length) {
+                    clearInterval(timer);
+                }
+            },
+            100);
+    };
+    $("#autotype").autotype();
+</script>
+</html>
